@@ -9,3 +9,62 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Age {
+  FILHOTE
+  ADULTO
+}
+
+enum Size {
+  PEQUENINO
+  MEDIO
+  GRANDE
+}
+
+enum Independent {
+  BAIXO
+  MEDIO
+  ALTO
+}
+
+model Pet {
+  id          String       @id @default(uuid())
+  name        String
+  age         Age
+  size        Size
+  independent Independent
+  energy      Int
+  enviroment  String
+  ong         Organization @relation(fields: [ongId], references: [id])
+  imgsId      String
+
+  ongId String
+
+  Requirements Requirements[]
+  petImgs      petImgs[]
+}
+
+model petImgs {
+  id      String @id @default(uuid())
+  buffer  String
+  imgName String
+  pet     Pet    @relation(fields: [petId], references: [id])
+  petId   String
+}
+
+model Requirements {
+  id          String @id @default(uuid())
+  description String
+  pet         Pet    @relation(fields: [petId], references: [id])
+  petId       String
+}
+
+model Organization {
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  cep      String
+  adress   String
+  password String
+  Pet      Pet[]
+}
