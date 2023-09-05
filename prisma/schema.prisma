@@ -65,6 +65,8 @@ model Organization {
   email    String
   cep      String
   adress   String
+  state    String
+  city     String
   password String
   Pet      Pet[]
 }
