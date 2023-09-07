@@ -30,17 +30,18 @@ enum Independent {
 model Pet {
   id          String       @id @default(uuid())
   name        String
+  description String
   age         Age
   size        Size
   independent Independent
   energy      Int
   enviroment  String
+  createdAt   DateTime
   ong         Organization @relation(fields: [ongId], references: [id])
-  imgsId      String
 
   ongId String
 
-  Requirements Requirements[]
+  requirements Requirements[]
   petImgs      petImgs[]
 }
 
@@ -60,13 +61,14 @@ model Requirements {
 }
 
 model Organization {
-  id       String @id @default(uuid())
-  name     String
-  email    String
-  cep      String
-  adress   String
-  state    String
-  city     String
-  password String
-  Pet      Pet[]
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  cep       String
+  adress    String
+  state     String
+  city      String
+  password  String
+  createdAt DateTime
+  Pet       Pet[]
 }
