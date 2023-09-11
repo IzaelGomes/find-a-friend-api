@@ -36,7 +36,7 @@ model Pet {
   independent Independent
   energy      Int
   enviroment  String
-  createdAt   DateTime
+  createdAt   DateTime     @updatedAt
   ong         Organization @relation(fields: [ongId], references: [id])
 
   ongId String
@@ -69,6 +69,6 @@ model Organization {
   state     String
   city      String
   password  String
-  createdAt DateTime
+  createdAt DateTime @updatedAt
   Pet       Pet[]
 }

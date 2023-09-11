@@ -12,19 +12,17 @@ describe('Create Ong Use Case', () => {
   })
 
   it('should be able to create an ong', async () => {
-    const date = new Date()
-    const ongData = {
+    const data = {
       name: 'family',
       email: 'family@gmail.com',
       cep: '2222333',
       adress: 'rua maria generosa de almeida',
       state: 'CE',
       city: 'juazeiro do norte',
-      password: '233333',
-      createdAt: date
+      password: '233333'
     }
 
-    const { createdOng } = await sut.execute(ongData)
+    const { createdOng } = await sut.execute({ data })
 
     expect(createdOng.id).toEqual(expect.any(String))
   })

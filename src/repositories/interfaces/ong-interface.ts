@@ -10,12 +10,14 @@ export interface Ong {
   createdAt: Date
   password: string
 }
+
+export type OngRequestValues = Omit<Ong, 'createdAt'>
 export interface getOnData extends Ong {
   pet?: Pet[]
 }
 
 export interface OngsRepository {
-  create: (data: Ong) => Promise<Ong>
+  create: (data: OngRequestValues) => Promise<Ong>
   getAllPets: (city: string) => Promise<Pet>
-  findById: (id: string) => Promise<Ong | undefined>
+  findById: (id: string) => Promise<Ong | null | undefined>
 }

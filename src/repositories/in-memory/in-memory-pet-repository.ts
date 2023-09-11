@@ -4,7 +4,7 @@ import { type Pet, type PetsRepository } from '../interfaces/pet-interface'
 export class InMemoryPetsRepository implements PetsRepository {
   public pet: Pet[] = []
 
-  async create (data: Pet): Promise<Pet> {
+  async create (data: Pet, ongId: string): Promise<Pet> {
     const pet = {
       id: data.id ?? randomUUID(),
       name: data.name,
@@ -14,7 +14,7 @@ export class InMemoryPetsRepository implements PetsRepository {
       enviroment: data.enviroment,
       independent: data.independent,
       description: data.description,
-      ongId: '4',
+      ongId,
       createdAt: data.createdAt,
       requirements: [{
         id: data.requirements[0].id,

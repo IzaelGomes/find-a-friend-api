@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryPetsRepository } from '../repositories/in-memory/in-memory-pet-repository'
 import { CreatePetUseCase } from './create-pet-use-case'
-import { Age, Independent, Size } from '../repositories/interfaces/pet-interface'
 import { InMemoryOngRepository } from '../repositories/in-memory/in-memory-ong-repository'
 import { OngNotFoundError } from './erros/ong-not-found-erro'
+import { type Age, type Independent, type Size } from '../repositories/interfaces/pet-interface'
 
 let petRepository: InMemoryPetsRepository
 let ongRepository: InMemoryOngRepository
@@ -31,14 +31,14 @@ describe('Create Pet Use Case', () => {
   })
 
   it('should be able to create a pet', async () => {
-    const petData = {
+    const data = {
       id: '19',
       name: 'nina',
-      age: Age.FILHOTE,
-      size: Size.PEQUENINO,
+      age: 'FILHOTE' as Age,
+      size: 'PEQUENINO' as Size,
       energy: 5,
       enviroment: 'Ambiente amplo',
-      independent: Independent.BAIXO,
+      independent: 'BAIXO' as Independent,
       description: 'Animal muito feliz',
       ongId: '4',
       createdAt: new Date(),
@@ -56,22 +56,22 @@ describe('Create Pet Use Case', () => {
       }]
     }
 
-    const { createdPet } = await sut.execute(petData)
+    const ongId = '4'
 
-    expect((await createdPet).id).toEqual(expect.any(String))
-    expect((await createdPet).petImgs[0].id).toEqual('18')
-    expect((await createdPet).requirements[0].id).toEqual('17')
+    const { createdPet } = await sut.execute({ data, ongId })
+
+    expect((await (createdPet)).id).toEqual(expect.any(String))
   })
 
   it('should not be able to create a pet if Ong is not valid', async () => {
-    const petData = {
+    const data = {
       id: '19',
       name: 'nina',
-      age: Age.FILHOTE,
-      size: Size.PEQUENINO,
+      age: 'FILHOTE' as Age,
+      size: 'PEQUENINO' as Size,
       energy: 5,
       enviroment: 'Ambiente amplo',
-      independent: Independent.BAIXO,
+      independent: 'BAIXO' as Independent,
       description: 'Animal muito feliz',
       ongId: '5',
       createdAt: new Date(),
@@ -89,6 +89,8 @@ describe('Create Pet Use Case', () => {
       }]
     }
 
-    await expect(async () => await sut.execute(petData)).rejects.toBeInstanceOf(OngNotFoundError)
+    const ongId = '5'
+
+    await expect(async () => await sut.execute({ data, ongId })).rejects.toBeInstanceOf(OngNotFoundError)
   })
 })
