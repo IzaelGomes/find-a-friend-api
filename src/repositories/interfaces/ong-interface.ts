@@ -1,4 +1,4 @@
-import { type Pet } from './pet-interface'
+import { type Age, type Size, type Pet, type Independent } from './pet-interface'
 export interface Ong {
   id?: string
   name: string
@@ -16,8 +16,15 @@ export interface getOnData extends Ong {
   pet?: Pet[]
 }
 
+export interface ResponseGetPetsByAndress {
+  ong: PetObject[]
+}
+
+export interface PetObject {
+  Pet: Pet[]
+}
 export interface OngsRepository {
-  create: (data: OngRequestValues) => Promise<Ong>
-  getAllPets: (city: string) => Promise<Pet>
+  create (data: OngRequestValues): Promise<Ong>
+  getPetsByAndress(city: string, state: string, age: Age | undefined, energy: number | undefined, independent: Independent | undefined, size: Size | undefined): Promise<ResponseGetPetsByAndress>
   findById: (id: string) => Promise<Ong | null | undefined>
 }

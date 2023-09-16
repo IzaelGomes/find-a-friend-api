@@ -43,16 +43,12 @@ describe('Create Pet Use Case', () => {
       ongId: '4',
       createdAt: new Date(),
       requirements: [{
-        id: '17',
-        description: 'precisa ter dinheiro',
-        petId: '19'
+        description: 'precisa ter dinheiro'
       }
       ],
       petImgs: [{
-        id: '18',
         buffer: 'daklsdjkaqew2212',
-        imgName: 'cachorro',
-        petId: '19'
+        imgName: 'cachorro'
       }]
     }
 

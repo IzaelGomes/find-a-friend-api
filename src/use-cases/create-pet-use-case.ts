@@ -12,7 +12,6 @@ export class CreatePetUseCase {
   ) {}
 
   async execute ({ data, ongId }: CreatePetUseCaseRequest) {
-    console.log(ongId)
     const foundOng = await this.ongRepository.findById(ongId)
 
     if (!foundOng) {

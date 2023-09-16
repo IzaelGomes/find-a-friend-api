@@ -1,5 +1,4 @@
-import { type OngRequestValues, type Ong, type OngsRepository } from '../interfaces/ong-interface'
-import { type Pet } from '../interfaces/pet-interface'
+import { type OngRequestValues, type Ong, type OngsRepository, type responseGetPetsByAndress } from '../interfaces/ong-interface'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryOngRepository implements OngsRepository {
@@ -23,7 +22,7 @@ export class InMemoryOngRepository implements OngsRepository {
     return ong
   }
 
-  async getAllPets (city: string): Promise<Pet> {
+  async getPetsByAndress (city: string): Promise<responseGetPetsByAndress> {
     throw new Error('Method not implemented.')
   }
 

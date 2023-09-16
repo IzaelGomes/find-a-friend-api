@@ -1,4 +1,3 @@
-import { randomUUID } from 'crypto'
 import { type Pet, type PetsRepository } from '../interfaces/pet-interface'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -6,7 +5,7 @@ export class InMemoryPetsRepository implements PetsRepository {
 
   async create (data: Pet, ongId: string): Promise<Pet> {
     const pet = {
-      id: data.id ?? randomUUID(),
+      id: data.id ?? '5',
       name: data.name,
       age: data.age,
       size: data.size,
@@ -17,16 +16,16 @@ export class InMemoryPetsRepository implements PetsRepository {
       ongId,
       createdAt: data.createdAt,
       requirements: [{
-        id: data.requirements[0].id,
-        description: data.requirements[0].description,
-        petId: data.requirements[0].petId
+        id: '4',
+        description: 'teste',
+        petId: '5'
       }
       ],
       petImgs: [{
-        id: data.petImgs[0].id,
+        id: '4',
         buffer: data.petImgs[0].buffer,
         imgName: data.petImgs[0].imgName,
-        petId: data.petImgs[0].petId
+        petId: '4'
       }]
     }
 

@@ -1,20 +1,3 @@
-// export enum Size {
-//   PEQUENINO = 'PEQUENINO',
-//   MEDIO = 'MEDIO',
-//   GRANDE = 'GRANDE'
-// }
-
-// export enum Independent {
-//   BAIXO = 'BAIXO',
-//   MEDIO = 'MEDIO',
-//   ALTO = 'ALTO'
-// }
-
-// export enum Age {
-//   FILHOTE = 'FILHOTE',
-//   ADULTO = 'ADULTO'
-// }
-
 export type Age = 'FILHOTE' | 'ADULTO'
 export type Independent = 'BAIXO' | 'MEDIO' | 'ALTO'
 export type Size = 'PEQUENINO' | 'MEDIO' | 'GRANDE'
@@ -31,6 +14,15 @@ export interface Pet {
   createdAt: Date
   requirements: requirements[]
   petImgs: PetImgs[]
+}
+
+export interface FindPet {
+  city: string
+  state: string
+  age?: Age
+  size?: Size
+  energy?: number
+  independent?: Independent
 }
 
 type requirements = {
