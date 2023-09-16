@@ -4,9 +4,13 @@ import { ongRoutes } from './http/controllers/ong/route'
 import { ZodError } from 'zod'
 import { petRoutes } from './http/controllers/pet/route'
 
+import mult from '@fastify/multipart'
+
 dotenv.config()
 
 export const fastify = Fastify()
+
+fastify.register(mult)
 
 fastify.register(ongRoutes)
 fastify.register(petRoutes)
