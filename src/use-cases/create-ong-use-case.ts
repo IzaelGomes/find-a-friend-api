@@ -1,11 +1,11 @@
-import { type OngRequestValues, type Ong, type OngsRepository } from '../repositories/interfaces/ong-interface'
+import { type OngRequestValues, type responseOngData, type OngsRepository } from '../repositories/interfaces/ong-interface'
 
 interface OngRequest {
   data: OngRequestValues
 }
 
 interface OngReponse {
-  createdOng: Ong
+  createdOng: responseOngData
 }
 export class CreateOngUseCase {
   constructor (

@@ -1,8 +1,8 @@
 import { type OngsRepository } from '../repositories/interfaces/ong-interface'
-import { type petUseCaseRequest, type PetsRepository } from '../repositories/interfaces/pet-interface'
+import { type PetRequest, type PetsRepository } from '../repositories/interfaces/pet-interface'
 import { OngNotFoundError } from './erros/ong-not-found-erro'
 interface CreatePetUseCaseRequest {
-  data: petUseCaseRequest
+  data: PetRequest
   ongId: string
 }
 export class CreatePetUseCase {

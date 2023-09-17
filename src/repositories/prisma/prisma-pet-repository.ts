@@ -1,8 +1,8 @@
 import { prisma } from '../../db/prisma'
-import { type petResponse, type Pet, type PetsRepository } from '../interfaces/pet-interface'
+import { type PetsRepository, type PetReponse, type PetRequest } from '../interfaces/pet-interface'
 
 export class PrismaPetRepository implements PetsRepository {
-  async create (data: Pet, ongId: string): Promise<petResponse> {
+  async create (data: PetRequest, ongId: string): Promise<Omit<PetReponse, 'requirements' | 'petImgs'>> {
     const pet = prisma.pet.create({
       data: {
         name: data.name,
@@ -40,7 +40,11 @@ export class PrismaPetRepository implements PetsRepository {
     return pet
   }
 
-  async getAllPets (city: string): Promise<Pet[]> {
+  async getAllPets (city: string): Promise<PetReponse[]> {
+    throw new Error('Method not implemented.')
+  }
+
+  async findPetById (id: string): Promise<PetReponse | undefined> {
     throw new Error('Method not implemented.')
   }
 }

@@ -1,9 +1,9 @@
-import { type Pet, type PetsRepository } from '../interfaces/pet-interface'
+import { type PetRequest, type PetReponse, type PetsRepository } from '../interfaces/pet-interface'
 
 export class InMemoryPetsRepository implements PetsRepository {
-  public pet: Pet[] = []
+  public pet: PetReponse[] = []
 
-  async create (data: Pet, ongId: string): Promise<Pet> {
+  async create (data: PetRequest, ongId: string): Promise<PetReponse> {
     const pet = {
       id: data.id ?? '5',
       name: data.name,
@@ -32,7 +32,13 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async getAllPets (city: string): Promise<Pet[]> {
+  async getAllPets (city: string): Promise<PetReponse[]> {
     throw new Error()
+  }
+
+  async findPetById (id: string): Promise<PetReponse | undefined> {
+    const pet = this.pet.find((pet) => pet.ongId === id)
+
+    return pet
   }
 }

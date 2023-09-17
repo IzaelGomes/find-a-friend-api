@@ -1,10 +1,10 @@
-import { type OngRequestValues, type Ong, type OngsRepository, type responseGetPetsByAndress } from '../interfaces/ong-interface'
+import { type OngRequestValues, type responseOngData, type OngsRepository, type ResponseGetPetsByAndress } from '../interfaces/ong-interface'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryOngRepository implements OngsRepository {
-  public onganization: Ong[] = []
+  public onganization: responseOngData[] = []
 
-  async create (data: OngRequestValues): Promise<Ong> {
+  async create (data: OngRequestValues): Promise<responseOngData> {
     const ong = {
       id: data.id ?? randomUUID(),
       name: data.name,
@@ -22,11 +22,15 @@ export class InMemoryOngRepository implements OngsRepository {
     return ong
   }
 
-  async getPetsByAndress (city: string): Promise<responseGetPetsByAndress> {
-    throw new Error('Method not implemented.')
+  async getPetsByAndress (city: string, state: string): Promise<ResponseGetPetsByAndress> {
+    const pet = this.onganization.find((ong) => ong.city === city && ong.state === state)
+
+    console.log(pet)
+
+    return pet
   }
 
-  async findById (id: string): Promise<Ong | null | undefined> {
+  async findById (id: string): Promise<responseOngData | null | undefined> {
     const ongFound = this.onganization.find((ong) => ong.id === id)
 
     return ongFound
