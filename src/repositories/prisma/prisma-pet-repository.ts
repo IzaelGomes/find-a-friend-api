@@ -3,7 +3,7 @@ import { type PetsRepository, type PetReponse, type PetRequest } from '../interf
 
 export class PrismaPetRepository implements PetsRepository {
   async create (data: PetRequest, ongId: string): Promise<Omit<PetReponse, 'requirements' | 'petImgs'>> {
-    const pet = prisma.pet.create({
+    const pet = await prisma.pet.create({
       data: {
         name: data.name,
         description: data.description,
@@ -45,7 +45,7 @@ export class PrismaPetRepository implements PetsRepository {
   }
 
   async findPetById (id: string): Promise<PetReponse | null> {
-    const pet = prisma.pet.findFirst({
+    const pet = await prisma.pet.findFirst({
       where: {
         id
       },

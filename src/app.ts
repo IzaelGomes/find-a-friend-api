@@ -17,7 +17,6 @@ fastify.register(petRoutes)
 
 fastify.setErrorHandler(function (error, _, reply) {
   if (error instanceof ZodError) {
-    console.log(error)
     return reply.status(400).send({
       message: 'validation error.',
       issues: error.format()
