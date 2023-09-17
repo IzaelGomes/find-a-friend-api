@@ -5,7 +5,7 @@ export class InMemoryPetsRepository implements PetsRepository {
 
   async create (data: PetRequest, ongId: string): Promise<PetReponse> {
     const pet = {
-      id: data.id ?? '5',
+      id: '5',
       name: data.name,
       age: data.age,
       size: data.size,
@@ -14,7 +14,7 @@ export class InMemoryPetsRepository implements PetsRepository {
       independent: data.independent,
       description: data.description,
       ongId,
-      createdAt: data.createdAt,
+      createdAt: new Date(),
       requirements: [{
         id: '4',
         description: 'teste',
@@ -29,6 +29,8 @@ export class InMemoryPetsRepository implements PetsRepository {
       }]
     }
 
+    this.pet.push(pet)
+
     return pet
   }
 
@@ -36,9 +38,11 @@ export class InMemoryPetsRepository implements PetsRepository {
     throw new Error()
   }
 
-  async findPetById (id: string): Promise<PetReponse | undefined> {
-    const pet = this.pet.find((pet) => pet.ongId === id)
+  async findPetById (id: string): Promise<PetReponse | null> {
+    console.log(id)
+    console.log(this.pet)
+    const pet = this.pet.find((pet) => pet.id === id)
 
-    return pet
+    return pet ?? null
   }
 }

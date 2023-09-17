@@ -69,6 +69,7 @@ model Organization {
   state     String
   city      String
   password  String
+  phone     String?
   createdAt DateTime @updatedAt
   Pet       Pet[]
 }

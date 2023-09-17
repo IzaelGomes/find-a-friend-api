@@ -2,11 +2,7 @@ export type Age = 'FILHOTE' | 'ADULTO'
 export type Independent = 'BAIXO' | 'MEDIO' | 'ALTO'
 export type Size = 'PEQUENINO' | 'MEDIO' | 'GRANDE'
 
-
-
-
 export interface PetRequest {
-  id: string
   name: string
   description: string
   age: Age
@@ -14,7 +10,6 @@ export interface PetRequest {
   energy: number
   independent: Independent
   enviroment: string
-  createdAt: Date
   requirements: requirementsRequest[]
   petImgs: PetImgsRequest[]
 }
@@ -67,5 +62,5 @@ type PetImgsRequest = {
 export interface PetsRepository {
   create(data: PetRequest, ongId: string): Promise<Omit<PetReponse, 'requirements' | 'petImgs'>>
   getAllPets(city: string): Promise<PetReponse[]>
-  findPetById(id: string): Promise<PetReponse | undefined>
+  findPetById(id: string): Promise<PetReponse | null>
 }

@@ -7,6 +7,7 @@ export interface responseOngData {
   adress: string
   state: string
   city: string
+  phone?: string
   createdAt: Date
   password: string
 }

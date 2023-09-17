@@ -44,7 +44,25 @@ export class PrismaPetRepository implements PetsRepository {
     throw new Error('Method not implemented.')
   }
 
-  async findPetById (id: string): Promise<PetReponse | undefined> {
-    throw new Error('Method not implemented.')
+  async findPetById (id: string): Promise<PetReponse | null> {
+    const pet = prisma.pet.findFirst({
+      where: {
+        id
+      },
+      include: {
+        petImgs: true,
+        requirements: true,
+        ong: {
+          select: {
+            adress: true,
+            state: true,
+            city: true,
+            phone: true
+          }
+        }
+      }
+    })
+
+    return pet
   }
 }

@@ -59,8 +59,6 @@ export async function create (request: FastifyRequest, reply: FastifyReply) {
     ]
   }
 
-  console.log(data)
-
   const { ongId } = petSchemaParams.parse(request.params)
 
   const petRepository = new PrismaPetRepository()

@@ -11,6 +11,7 @@ export async function create (request: FastifyRequest, reply: FastifyReply) {
     adress: z.string(),
     state: z.string(),
     city: z.string(),
+    phone: z.string(),
     password: z.string()
   })
 
