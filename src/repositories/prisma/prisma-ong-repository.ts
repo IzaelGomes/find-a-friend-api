@@ -1,9 +1,9 @@
 import { prisma } from '../../db/prisma'
-import { type OngRequestValues, type responseOngData, type OngsRepository, type ResponseGetPetsByAndress } from '../interfaces/ong-interface'
+import { type responseOngData, type OngsRepository, type ResponseGetPetsByAndress, type requestOngData } from '../interfaces/ong-interface'
 import { type Size, type Independent, type Age } from '../interfaces/pet-interface'
 
 export class PrismaOngRepository implements OngsRepository {
-  async findById (id: string): Promise<responseOngData | null | undefined> {
+  async findById (id: string): Promise<responseOngData | null> {
     const ong = prisma.organization.findFirst({
       where: {
         id
@@ -13,7 +13,7 @@ export class PrismaOngRepository implements OngsRepository {
     return ong
   }
 
-  async create (data: OngRequestValues): Promise<responseOngData> {
+  async create (data: requestOngData): Promise<responseOngData> {
     const ong = await prisma.organization.create({
       data: {
         ...data

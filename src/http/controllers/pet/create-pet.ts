@@ -3,14 +3,15 @@ import { z } from 'zod'
 import { PrismaOngRepository } from '../../../repositories/prisma/prisma-ong-repository'
 import { PrismaPetRepository } from '../../../repositories/prisma/prisma-pet-repository'
 import { CreatePetUseCase } from '../../../use-cases/create-pet-use-case'
+import { OngNotFoundError } from '../../../use-cases/erros/ong-not-found-erro'
 
 export async function create (request: FastifyRequest, reply: FastifyReply) {
   const fields = await request.file()
-  const requirementsArray = fields?.fields?.requirements?.value
+  const requirementsArray = (fields?.fields?.requirements as any)?.value
     ? JSON.parse(fields.fields.requirements.value)
     : []
 
-  const imgBase64: Buffer = await fields?.fields.petImgs?.toBuffer()
+  const imgBase64: Buffer = await (fields?.fields.petImgs as any)?.toBuffer()
 
   const petSchemaBody = z.object({
     name: z.object({
@@ -61,11 +62,21 @@ export async function create (request: FastifyRequest, reply: FastifyReply) {
 
   const { ongId } = petSchemaParams.parse(request.params)
 
-  const petRepository = new PrismaPetRepository()
-  const ongRepository = new PrismaOngRepository()
-  const petuseCase = new CreatePetUseCase(petRepository, ongRepository)
+  try {
+    const petRepository = new PrismaPetRepository()
+    const ongRepository = new PrismaOngRepository()
+    const petuseCase = new CreatePetUseCase(petRepository, ongRepository)
 
-  await petuseCase.execute({ data, ongId })
+    await petuseCase.execute({ data, ongId })
+  } catch (error) {
+    if (error instanceof OngNotFoundError) {
+      reply.status(404).send({
+        message: error.message
+      })
+    }
+
+    throw error
+  }
 
   return reply.status(201).send()
 }

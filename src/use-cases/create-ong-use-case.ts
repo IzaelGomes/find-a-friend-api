@@ -1,7 +1,8 @@
-import { type OngRequestValues, type responseOngData, type OngsRepository } from '../repositories/interfaces/ong-interface'
+import { hash } from 'bcryptjs'
+import { type requestOngData, type responseOngData, type OngsRepository } from '../repositories/interfaces/ong-interface'
 
 interface OngRequest {
-  data: OngRequestValues
+  data: requestOngData
 }
 
 interface OngReponse {
@@ -13,7 +14,14 @@ export class CreateOngUseCase {
   ) {}
 
   async execute ({ data }: OngRequest): Promise<OngReponse> {
-    const createdOng = await this.ongRepository.create(data)
+    const password = await hash(data.password, 6)
+
+    const ongData = {
+      ...data,
+      password
+    }
+
+    const createdOng = await this.ongRepository.create(ongData)
 
     return {
       createdOng
