@@ -31,5 +31,6 @@ export interface PetObject {
 export interface OngsRepository {
   create (data: requestOngData): Promise<responseOngData>
   getPetsByAndress(city: string, state: string, age: Age | undefined, energy: number | undefined, independent: Independent | undefined, size: Size | undefined): Promise<ResponseGetPetsByAndress>
-  findById: (id: string) => Promise<requestOngData | null | undefined>
+  findById (id: string): Promise<requestOngData | null | undefined>
+  findOngByEmail(email: string): Promise<responseOngData>
 }

@@ -43,4 +43,8 @@ export class PrismaOngRepository implements OngsRepository {
 
     return ong
   }
+
+  async findOngByEmail (email: string): Promise<responseOngData> {
+    throw new Error('Method not implemented.')
+  }
 }
