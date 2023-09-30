@@ -12,6 +12,7 @@ export class InMemoryOngRepository implements OngsRepository {
       adress: data.adress,
       state: data.state,
       city: data.city,
+      phone: data.phone,
       password: data.password,
       createdAt: new Date()
     }
@@ -21,19 +22,21 @@ export class InMemoryOngRepository implements OngsRepository {
     return ong
   }
 
-  async getPetsByAndress (city: string, state: string): Promise<ResponseGetPetsByAndress> {
+  async getPetsByAndress (city: string, state: string): Promise<ResponseGetPetsByAndress | null> {
     const pet = this.onganization.find((ong) => ong.city === city && ong.state === state)
 
-    return pet
+    return pet ?? null
   }
 
-  async findById (id: string): Promise<responseOngData | null | undefined> {
+  async findById (id: string): Promise<responseOngData | null > {
     const ongFound = this.onganization.find((ong) => ong.id === id)
 
-    return ongFound
+    return ongFound ?? null
   }
 
-  async findOngByEmail (email: string): Promise<responseOngData> {
-    throw new Error('Method not implemented.')
+  async findOngByEmail (email: string): Promise<responseOngData | null> {
+    const ong = this.onganization.find(ong => ong.email === email)
+
+    return ong ?? null
   }
 }

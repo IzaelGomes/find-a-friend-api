@@ -16,6 +16,7 @@ export interface requestOngData {
   name: string
   email: string
   cep: string
+  phone: string | null
   adress: string
   state: string
   city: string
@@ -30,7 +31,7 @@ export interface PetObject {
 }
 export interface OngsRepository {
   create (data: requestOngData): Promise<responseOngData>
-  getPetsByAndress(city: string, state: string, age: Age | undefined, energy: number | undefined, independent: Independent | undefined, size: Size | undefined): Promise<ResponseGetPetsByAndress>
-  findById (id: string): Promise<requestOngData | null | undefined>
-  findOngByEmail(email: string): Promise<responseOngData>
+  getPetsByAndress(city: string, state: string, age: Age | undefined, energy: number | undefined, independent: Independent | undefined, size: Size | undefined): Promise<ResponseGetPetsByAndress | null>
+  findById (id: string): Promise<requestOngData | null >
+  findOngByEmail(email: string): Promise<responseOngData | null>
 }

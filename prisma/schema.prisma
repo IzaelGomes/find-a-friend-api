@@ -63,7 +63,7 @@ model Requirements {
 model Organization {
   id        String   @id @default(uuid())
   name      String
-  email     String
+  email     String   @unique
   cep       String
   adress    String
   state     String

@@ -19,7 +19,8 @@ describe('Create Ong Use Case', () => {
       adress: 'rua maria generosa de almeida',
       state: 'CE',
       city: 'juazeiro do norte',
-      password: '233333'
+      password: '233333',
+      phone: '88776677'
     }
 
     const { createdOng } = await sut.execute({ data })
