@@ -22,6 +22,7 @@ describe('Create Pet Use Case', () => {
       cep: '2222333',
       adress: 'rua maria generosa de almeida',
       state: 'CE',
+      phone: '88887778',
       city: 'juazeiro do norte',
       password: '233333',
       createdAt: new Date()
