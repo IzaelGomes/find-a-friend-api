@@ -16,9 +16,17 @@ export async function Authenticate (request: FastifyRequest, reply: FastifyReply
     const ongRepository = new PrismaOngRepository()
     const petuseCase = new AuthenticateUseCase(ongRepository)
 
-    await petuseCase.execute({ email: data.email, password: data.password })
+    const { ong } = await petuseCase.execute({ email: data.email, password: data.password })
 
-    return reply.status(200).send()
+    const token = await reply.jwtSign({}, {
+      sign: {
+        sub: ong.id
+      }
+    })
+
+    return reply.status(200).send({
+      token
+    })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(409).send({

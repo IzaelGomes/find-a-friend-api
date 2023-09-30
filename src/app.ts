@@ -5,11 +5,15 @@ import { ZodError } from 'zod'
 import { petRoutes } from './http/controllers/pet/route'
 
 import mult from '@fastify/multipart'
+import fastifyJwt from '@fastify/jwt'
 
 dotenv.config()
 
 export const fastify = Fastify()
 
+fastify.register(fastifyJwt, {
+  secret: String(process.env.JWT_SECRET)
+})
 fastify.register(mult)
 
 fastify.register(ongRoutes)

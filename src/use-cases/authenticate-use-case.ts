@@ -1,5 +1,5 @@
 import { compare } from 'bcryptjs'
-import { type OngsRepository, type requestOngData } from '../repositories/interfaces/ong-interface'
+import { type responseOngData, type OngsRepository } from '../repositories/interfaces/ong-interface'
 import { InvalidCredentialsError } from './erros/invalid-credentials.erro'
 
 interface AuthenticateUseCaseRequest {
@@ -8,7 +8,7 @@ interface AuthenticateUseCaseRequest {
 }
 
 interface AuthenticateUseCaseResponse {
-  ong: requestOngData
+  ong: responseOngData
 }
 
 export class AuthenticateUseCase {
