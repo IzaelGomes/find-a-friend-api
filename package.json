@@ -28,6 +28,7 @@
     "vitest": "^0.34.3"
   },
   "dependencies": {
+    "@fastify/cookie": "^9.1.0",
     "@fastify/jwt": "^7.2.1",
     "@fastify/multipart": "^7.7.3",
     "@prisma/client": "^5.2.0",

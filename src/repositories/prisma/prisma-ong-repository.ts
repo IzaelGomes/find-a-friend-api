@@ -4,7 +4,7 @@ import { type Size, type Independent, type Age } from '../interfaces/pet-interfa
 
 export class PrismaOngRepository implements OngsRepository {
   async findById (id: string): Promise<responseOngData | null> {
-    const ong = prisma.organization.findFirst({
+    const ong = await prisma.organization.findFirst({
       where: {
         id
       }
@@ -45,7 +45,7 @@ export class PrismaOngRepository implements OngsRepository {
   }
 
   async findOngByEmail (email: string): Promise<responseOngData | null> {
-    const ong = prisma.organization.findUnique({
+    const ong = await prisma.organization.findUnique({
       where: {
         email
       }

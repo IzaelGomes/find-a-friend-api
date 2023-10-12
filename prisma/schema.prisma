@@ -43,6 +43,8 @@ model Pet {
 
   requirements Requirements[]
   petImgs      petImgs[]
+
+  @@map("pets")
 }
 
 model petImgs {
@@ -51,6 +53,8 @@ model petImgs {
   imgName String
   pet     Pet    @relation(fields: [petId], references: [id])
   petId   String
+
+  @@map("petsimgs")
 }
 
 model Requirements {
@@ -58,6 +62,8 @@ model Requirements {
   description String
   pet         Pet    @relation(fields: [petId], references: [id])
   petId       String
+
+  @@map("requirements")
 }
 
 model Organization {
@@ -72,4 +78,6 @@ model Organization {
   phone     String?
   createdAt DateTime @updatedAt
   Pet       Pet[]
+
+  @@map("organization")
 }

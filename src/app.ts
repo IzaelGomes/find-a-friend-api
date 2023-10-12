@@ -6,14 +6,25 @@ import { petRoutes } from './http/controllers/pet/route'
 
 import mult from '@fastify/multipart'
 import fastifyJwt from '@fastify/jwt'
+import fastifyCookie from '@fastify/cookie'
 
 dotenv.config()
 
 export const fastify = Fastify()
 
 fastify.register(fastifyJwt, {
-  secret: String(process.env.JWT_SECRET)
+  secret: String(process.env.JWT_SECRET),
+  cookie: {
+    cookieName: 'refreshToken',
+    signed: false
+  },
+  sign: {
+    expiresIn: '10m'
+  }
 })
+
+fastify.register(fastifyCookie)
+
 fastify.register(mult)
 
 fastify.register(ongRoutes)
